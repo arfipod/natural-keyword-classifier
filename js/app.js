@@ -31,6 +31,7 @@ window.NKC_APP = (() => {
             .createToastController(dom.toastContainer)
             .showErrorToast;
         bindEvents();
+        updateSeedCategoryOptions();
         updateThresholdLabel();
         updateThresholdControl();
     }
@@ -39,6 +40,7 @@ window.NKC_APP = (() => {
         dom.input = document.getElementById("input");
         dom.seedsInput = document.getElementById("seedsInput");
         dom.seedCategoryInput = document.getElementById("seedCategoryInput");
+        dom.seedCategoryOptions = document.getElementById("seedCategoryOptions");
         dom.seedRuleInput = document.getElementById("seedRuleInput");
         dom.seedRuleType = document.getElementById("seedRuleType");
         dom.seedNegativeInput = document.getElementById("seedNegativeInput");
@@ -64,6 +66,7 @@ window.NKC_APP = (() => {
         dom.exportSessionButton.addEventListener("click", exportCurrentSession);
         dom.importSessionButton.addEventListener("click", () => dom.sessionFileInput.click());
         dom.sessionFileInput.addEventListener("change", importSelectedSession);
+        dom.seedsInput.addEventListener("input", updateSeedCategoryOptions);
         dom.addSeedRuleButton.addEventListener("click", addSeedRuleFromBuilder);
         dom.seedRuleInput.addEventListener("keydown", (event) => {
             if (event.key === "Enter") {
@@ -90,6 +93,20 @@ window.NKC_APP = (() => {
         dom.thresholdBlock.hidden = !usesThreshold;
     }
 
+    function updateSeedCategoryOptions() {
+        const fragment = document.createDocumentFragment();
+
+        Object.keys(parseSeeds(dom.seedsInput.value))
+            .sort((categoryA, categoryB) => categoryA.localeCompare(categoryB))
+            .forEach((category) => {
+                const option = document.createElement("option");
+                option.value = category;
+                fragment.appendChild(option);
+            });
+
+        dom.seedCategoryOptions.replaceChildren(fragment);
+    }
+
     function addSeedRuleFromBuilder() {
         const category = dom.seedCategoryInput.value.trim().toUpperCase();
         const rawRule = dom.seedRuleInput.value.trim();
@@ -104,6 +121,7 @@ window.NKC_APP = (() => {
             category,
             formatSeedRule(rawRule, dom.seedRuleType.value, dom.seedNegativeInput.checked)
         );
+        updateSeedCategoryOptions();
         dom.seedRuleInput.value = "";
         dom.seedRuleInput.focus();
     }
@@ -225,6 +243,7 @@ window.NKC_APP = (() => {
             dom.seedsInput.value = session.seedsText;
             dom.mode.value = session.mode;
             dom.threshold.value = session.threshold;
+            updateSeedCategoryOptions();
             updateThresholdLabel();
             updateThresholdControl();
             processItems();

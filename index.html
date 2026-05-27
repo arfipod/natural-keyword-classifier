@@ -26,7 +26,14 @@
             <p>Format:</p>
             <pre>CATEGORY: word, "key phrase", /regex/, -excluded</pre>
             <div class="seed-builder" aria-label="Seed rule builder">
-                <input id="seedCategoryInput" type="text" placeholder="CATEGORY" aria-label="Seed category">
+                <input
+                    id="seedCategoryInput"
+                    type="text"
+                    placeholder="CATEGORY"
+                    aria-label="Seed category"
+                    list="seedCategoryOptions"
+                >
+                <datalist id="seedCategoryOptions"></datalist>
                 <input id="seedRuleInput" type="text" placeholder="keyword, phrase, or regex" aria-label="Seed rule">
                 <select id="seedRuleType" aria-label="Seed rule type">
                     <option value="AUTO">Auto</option>
