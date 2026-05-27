@@ -2,106 +2,68 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <title>
-        Requirements Clustering Tool
-    </title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Keyword Classifier by ARRF</title>
     <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
+    <main class="app">
+        <header class="app-header">
+            <h1>Natural Keyword Classifier by ARRF</h1>
+        </header>
 
-    <h1>
-        Requirements Clustering Tool
-    </h1>
+        <section class="input-section" aria-labelledby="itemsHeading">
+            <h2 id="itemsHeading">Items</h2>
+            <p>Format:</p>
+            <pre>ID Text description</pre>
+            <textarea id="input" aria-label="Items"></textarea>
+        </section>
 
-    <h2>
-        Requirements
-    </h2>
+        <section class="input-section" aria-labelledby="seedsHeading">
+            <h2 id="seedsHeading">Seed Categories</h2>
+            <p>Format:</p>
+            <pre>CATEGORY: word1,word2,word3</pre>
+            <textarea id="seedsInput" aria-label="Seed categories"></textarea>
+        </section>
 
-    <p>
-        Format:
-    </p>
+        <section class="controls" aria-label="Clustering controls">
+            <div class="control-block">
+                <label for="mode">Clustering Mode</label>
+                <select id="mode">
+                    <option value="SUPERVISED">Supervised (Seeds)</option>
+                    <option value="UNSUPERVISED">Unsupervised</option>
+                </select>
+            </div>
 
-    <pre>Requirement description</pre>
+            <div class="control-block" id="thresholdBlock">
+                <label for="threshold">Similarity Threshold</label>
+                <div class="range-control">
+                    <input
+                        type="range"
+                        id="threshold"
+                        min="0.10"
+                        max="1.00"
+                        step="0.05"
+                        value="0.30"
+                    >
+                    <span id="thresholdValue">0.30</span>
+                </div>
+            </div>
+        </section>
 
-    <textarea id="input"> </textarea>
-
-    <h2>
-        Seed Categories
-    </h2>
-
-    <p>
-        Format:
-    </p>
-
-    <pre>
-CATEGORY: word1,word2,word3
-    </pre>
-
-    <textarea id="seedsInput"></textarea>
-
-    <div class="controls">
-
-        <div class="control-block">
-
-            <label>
-                Clustering Mode
-            </label>
-
-            <select id="mode">
-
-                <option value="SUPERVISED">
-                    Supervised (Seeds)
-                </option>
-
-                <option value="UNSUPERVISED">
-                    Unsupervised
-                </option>
-
-            </select>
-
+        <div class="action-bar">
+            <button id="clusterButton" type="button">Cluster Items</button>
+            <button id="exportButton" type="button" disabled>Export XLSX</button>
         </div>
 
-        <div class="control-block">
+        <section id="output" class="output" aria-live="polite"></section>
+    </main>
 
-            <label>
-                Similarity Threshold
-            </label>
-
-            <input
-                type="range"
-                id="threshold"
-                min="0.10"
-                max="1.00"
-                step="0.05"
-                value="0.30"
-            >
-
-            <span id="thresholdValue">
-                0.30
-            </span>
-
-        </div>
-
-    </div>
-
-    <button onclick="processRequirements()">
-
-        Cluster Requirements
-
-    </button>
-
-    <div id="output"></div>
-
-    <script src="vendor/compromise.min.js"></script>
+    <div id="toastContainer" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
 
     <script src="script.js"></script>
-
 </body>
 
 </html>
