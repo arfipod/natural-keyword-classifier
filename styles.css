@@ -68,6 +68,30 @@ textarea {
     resize: vertical;
 }
 
+.seed-builder {
+    display: grid;
+    grid-template-columns: minmax(110px, 0.7fr) minmax(180px, 1.5fr) minmax(92px, auto) auto auto;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.seed-builder input[type="text"] {
+    min-width: 0;
+    min-height: 38px;
+    padding: 8px 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    font: inherit;
+}
+
+.inline-check {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    white-space: nowrap;
+}
+
 #seedsInput {
     min-height: 180px;
 }
@@ -144,6 +168,7 @@ button:disabled:hover {
 button:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
+input[type="text"]:focus-visible,
 input[type="range"]:focus-visible {
     outline: 3px solid rgba(37, 99, 235, 0.35);
     outline-offset: 2px;
@@ -151,6 +176,46 @@ input[type="range"]:focus-visible {
 
 .output {
     margin-top: 20px;
+}
+
+.app-footer {
+    margin-top: 36px;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    text-align: center;
+}
+
+.result-tabs {
+    display: inline-flex;
+    gap: 4px;
+    margin-top: 10px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.result-tab {
+    padding: 9px 14px;
+    border: 1px solid var(--color-border);
+    border-bottom: 0;
+    border-radius: 6px 6px 0 0;
+    background: var(--color-surface-muted);
+    color: var(--color-text);
+}
+
+.result-tab:hover {
+    background: #edf4ff;
+    color: var(--color-primary-hover);
+}
+
+.result-tab.is-active {
+    position: relative;
+    top: 1px;
+    background: var(--color-surface);
+    color: var(--color-primary-hover);
+    font-weight: 700;
+}
+
+.result-panel {
+    margin-top: 0;
 }
 
 .category-overview {
@@ -192,6 +257,28 @@ input[type="range"]:focus-visible {
     background: #f0f2f5;
     color: var(--color-text-muted);
     font-weight: 700;
+}
+
+.cluster-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: flex-end;
+    margin-top: 12px;
+}
+
+.cluster-controls button {
+    padding: 8px 12px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 14px;
+}
+
+.cluster-controls button:hover {
+    border-color: var(--color-primary);
+    background: #edf4ff;
+    color: var(--color-primary-hover);
 }
 
 .cluster {
@@ -272,6 +359,60 @@ input[type="range"]:focus-visible {
     font-size: 12px;
 }
 
+.classification-evidence {
+    margin-top: 6px;
+    color: #365314;
+    font-size: 12px;
+}
+
+.table-view {
+    overflow-x: auto;
+    margin-top: 20px;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+}
+
+.results-table {
+    width: 100%;
+    min-width: 980px;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.results-table th,
+.results-table td {
+    padding: 8px 10px;
+    border-right: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: top;
+}
+
+.results-table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--color-surface-muted);
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.results-table th:last-child,
+.results-table td:last-child {
+    border-right: 0;
+}
+
+.results-table tbody tr:nth-child(even) {
+    background: #f7f8fa;
+}
+
+.results-table tbody tr.is-uncategorized {
+    background: #fbfbfc;
+    color: var(--color-text-muted);
+}
+
 .empty-cluster {
     margin: 10px 0 0;
     color: var(--color-text-muted);
@@ -341,12 +482,27 @@ input[type="range"]:focus-visible {
     }
 
     .controls,
-    .range-control {
+    .range-control,
+    .seed-builder {
         align-items: stretch;
         flex-direction: column;
     }
 
+    .seed-builder {
+        display: flex;
+    }
+
     input[type="range"] {
         width: 100%;
+    }
+
+    .result-tabs {
+        display: flex;
+        width: 100%;
+    }
+
+    .result-tab {
+        flex: 1;
+        padding-inline: 8px;
     }
 }

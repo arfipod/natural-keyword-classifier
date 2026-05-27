@@ -4,14 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natural Keyword Classifier by ARRF</title>
+    <title>Natural Keyword Classifier</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <main class="app">
         <header class="app-header">
-            <h1>Natural Keyword Classifier by ARRF</h1>
+            <h1>Natural Keyword Classifier</h1>
         </header>
 
         <section class="input-section" aria-labelledby="itemsHeading">
@@ -24,7 +24,22 @@
         <section class="input-section" aria-labelledby="seedsHeading">
             <h2 id="seedsHeading">Seed Categories</h2>
             <p>Format:</p>
-            <pre>CATEGORY: word1,word2,word3</pre>
+            <pre>CATEGORY: word, "key phrase", /regex/, -excluded</pre>
+            <div class="seed-builder" aria-label="Seed rule builder">
+                <input id="seedCategoryInput" type="text" placeholder="CATEGORY" aria-label="Seed category">
+                <input id="seedRuleInput" type="text" placeholder="keyword, phrase, or regex" aria-label="Seed rule">
+                <select id="seedRuleType" aria-label="Seed rule type">
+                    <option value="AUTO">Auto</option>
+                    <option value="TOKEN">Word</option>
+                    <option value="PHRASE">Phrase</option>
+                    <option value="REGEX">Regex</option>
+                </select>
+                <label class="inline-check">
+                    <input id="seedNegativeInput" type="checkbox">
+                    Negative
+                </label>
+                <button id="addSeedRuleButton" type="button">Add Rule</button>
+            </div>
             <textarea id="seedsInput" aria-label="Seed categories"></textarea>
         </section>
 
@@ -56,13 +71,31 @@
         <div class="action-bar">
             <button id="clusterButton" type="button">Cluster Items</button>
             <button id="exportButton" type="button" disabled>Export XLSX</button>
+            <button id="exportSessionButton" type="button">Export Session JSON</button>
+            <button id="importSessionButton" type="button">Import Session JSON</button>
+            <input id="sessionFileInput" type="file" accept="application/json,.json" hidden>
         </div>
 
         <section id="output" class="output" aria-live="polite"></section>
+
+        <footer class="app-footer">
+            Made with 💙 by arrf
+        </footer>
     </main>
 
     <div id="toastContainer" class="toast-container" aria-live="assertive" aria-atomic="true"></div>
 
+    <script src="js/config.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/text.js"></script>
+    <script src="js/seeds.js"></script>
+    <script src="js/items.js"></script>
+    <script src="js/clustering.js"></script>
+    <script src="js/results.js"></script>
+    <script src="js/xlsx.js"></script>
+    <script src="js/toast.js"></script>
+    <script src="js/session.js"></script>
+    <script src="js/app.js"></script>
     <script src="script.js"></script>
 </body>
 

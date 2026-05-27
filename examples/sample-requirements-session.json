@@ -1,0 +1,14 @@
+{
+  "app": "natural-keyword-classifier",
+  "version": 1,
+  "savedAt": "2026-05-27T20:00:00.000Z",
+  "inputs": {
+    "items": "REQ-001 The user shall login with username and password before accessing the dashboard\nREQ-002 The system must support OAuth2 token refresh for API sessions\nREQ-003 Guest users can preview the landing page without authentication\nREQ-004 The user shall export filtered requirements to XLSX with a summary sheet\nREQ-005 The app must download a JSON session containing inputs and classification results\nREQ-006 The table view shall allow scanning category item id description tokens and score\nREQ-007 Buttons and error toasts must remain visible on narrow mobile screens\nREQ-008 The system shall store audit events when a requirement category is changed\nREQ-009 Audit logs must include previous category new category timestamp and user id\nREQ-010 The classifier should ignore temporary preview data when exporting final results\nREQ-011 The API integration shall retry failed webhook delivery three times\nREQ-012 The system must validate imported session JSON before applying it\nREQ-013 Large input batches of 5000 requirements should classify without freezing the browser\nREQ-014 Tokenization should remove accents and common stopwords from Spanish descriptions\nREQ-015 Email notifications shall be sent when a reviewed requirement remains uncategorized\nREQ-016 Notification templates must not include password or secret token values\nREQ-017 Administrators shall manage category seeds phrases negative rules and regex patterns\nREQ-018 The app must remain fully offline and avoid external network calls\nREQ-019 The UI shall show matched rules and negative-rule notes for every supervised result\nREQ-020 The integration endpoint must reject invalid payload signatures",
+    "seeds": "AUTH: login,password,oauth,token,session,\"accessing the dashboard\",-/guest|preview|notification/\nEXPORT: export,xlsx,download,spreadsheet,\"summary sheet\",\"json session\",-preview\nUI: table,button,toast,screen,mobile,dashboard,\"table view\",-/api|webhook/\nAUDIT: audit,log,timestamp,\"previous category\",\"new category\",\"matched rules\"\nINTEGRATION: api,webhook,endpoint,payload,signature,retry,\"external network\",-offline\nPERFORMANCE: large,batch,5000,freezing,browser,\"without freezing\"\nDATA_QUALITY: validate,imported,json,tokenization,accents,stopwords,regex,\"negative rules\"\nNOTIFICATIONS: email,notification,template,uncategorized,-password,-token\nOFFLINE: offline,\"fully offline\",\"external network calls\",-/webhook|api/"
+  },
+  "controls": {
+    "mode": "SUPERVISED",
+    "threshold": "0.30"
+  },
+  "results": null
+}
